@@ -6,10 +6,10 @@ for (let i = 0; i < people.length; i++) {
     console.log(people[i]);
 }
 
-// Remove "Greg" from the array
+// Remove "Sakthi" from the array
 people.splice(people.indexOf("Sakthi"), 1);
 
-// Remove "James" from the array
+// Remove "Mark" from the array
 people.splice(people.indexOf("Mark"), 1);
 
 // Add "Matt" to the front of the array

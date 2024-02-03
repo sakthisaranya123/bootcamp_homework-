@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accept Terms and Conditions</title>
+    <style>
+        #signatureCanvas {
+            border: 1px solid #000;
+            cursor: crosshair;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Terms and Conditions</h2>
+    <p><strong>Please read our Terms and Conditions and sign below.</strong></p>
+   
+<form>
+        <label>First Name<span style="color: red;"> *</span></label><br>
+        <input type="text">
+
+        <p><label>Last Name<span style="color: red;"> *</span></label><br>
+        <input type="text"></p>
+
+        <p><label>Email<span style="color: red;"> *</span></label><br>
+        <input type="Email"><br></p>
+</form>
+<form id="acceptForm">
+        <label for="acceptTerms">I accept the terms and conditions:</label>
+        <input type="checkbox" id="acceptTerms" required>
+
+        <p>Signature:</p>
+        <canvas id="signatureCanvas" width="400" height="200"></canvas>
+
+        <p><button type="submit">Submit</button></p>
+    </form>
+
+    <script>
+        const form = document.getElementById('acceptForm');
+        const canvas = document.getElementById('signatureCanvas');
+        const ctx = canvas.getContext('2d');
+
+        form.addEventListener('submit', function(event) {
+            event.preventDefault();
+
+            // Check if terms are accepted
+            if (form.acceptTerms.checked) {
+                // You can handle the signature data here 
+                alert('Terms accepted! Signature captured.');
+            } else {
+                alert('Please accept the terms before submitting.');
+            }
+        });
+
+        let drawing = false;
+
+        canvas.addEventListener('mousedown', function() {
+            drawing = true;
+            ctx.beginPath();
+        });
+
+        canvas.addEventListener('mouseup', function() {
+            drawing = false;
+            ctx.closePath();
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            if (!drawing) return;
+
+            // Draw signature
+            ctx.lineWidth = 2;
+            ctx.lineCap = 'round';
+            ctx.lineTo(e.clientX - canvas.offsetLeft, e.clientY - canvas.offsetTop);
+            ctx.stroke();
+        });
+    </script>
+
+</body>
+</html>
